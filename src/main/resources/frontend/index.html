@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestor de Hábitos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <div class="container">
+        <h1>🎯 Gestor de Hábitos</h1>
+        
+        <!-- Sección de Login/Registro -->
+        <div id="auth-section">
+            <div class="auth-box">
+                <h2>Iniciar Sesión</h2>
+                <input type="email" id="login-email" placeholder="Email">
+                <input type="password" id="login-password" placeholder="Contraseña">
+                <button onclick="login()">Entrar</button>
+            </div>
+            
+            <div class="auth-box">
+                <h2>Registrarse</h2>
+                <input type="text" id="register-name" placeholder="Nombre">
+                <input type="email" id="register-email" placeholder="Email">
+                <input type="password" id="register-password" placeholder="Contraseña">
+                <button onclick="register()">Registrarse</button>
+            </div>
+        </div>
+        
+        <!-- Sección de Hábitos (oculta inicialmente) -->
+        <div id="habitos-section" style="display:none;">
+            
+            <!-- Dashboard de estadísticas del día -->
+            <div class="dashboard">
+                <h2>📊 Tu progreso de hoy</h2>
+                
+                <div class="stats-cards">
+                    <div class="stat-card">
+                        <div class="stat-value" id="completados-hoy">0</div>
+                        <div class="stat-label">Completados hoy</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-value" id="total-habitos">0</div>
+                        <div class="stat-label">Total hábitos</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-value" id="porcentaje-dia">0%</div>
+                        <div class="stat-label">Progreso del día</div>
+                    </div>
+                </div>
+                
+                <div class="progress-bar-container">
+                    <div class="progress-bar" id="progress-bar"></div>
+                </div>
+            </div>
+            
+            <h2>Mis Hábitos</h2>
+            
+            <div class="add-habito">
+                <input type="text" id="habito-titulo" placeholder="Nuevo hábito (ej: Leer 30 min)">
+                <button onclick="crearHabito()">➕ Añadir</button>
+            </div>
+            
+            <div id="lista-habitos"></div>
+            
+            <button onclick="logout()" style="margin-top: 20px;">Cerrar Sesión</button>
+        </div>
+    </div>
+    
+    <script src="app.js"></script>
+</body>
+</html>
