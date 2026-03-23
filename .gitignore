@@ -1,33 +1,30 @@
-HELP.md
-target/
-.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
+# ─────────────────────────────────────────────
+# .gitignore — backend
+# ─────────────────────────────────────────────
 
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
+# Dependencias — se reinstalan con "npm install"
+node_modules/
 
-### IntelliJ IDEA ###
-.idea
-*.iws
-*.iml
-*.ipr
+# Variables de entorno — contienen secretos, NUNCA a Git
+.env
 
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
+# Base de datos SQLite — datos de usuarios reales
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
 
-### VS Code ###
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Editores
 .vscode/
+.idea/
+*.swp
+*.swo
