@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hábitos — Demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- AUTH -->
+<section id="auth-section">
+  <div class="auth-hero">
+    <span class="demo-badge">Demo</span>
+    <div class="auth-hero-inner">
+      <span class="eyebrow">Sistema de hábitos</span>
+      <h1 class="hero-title">Construye<br><em>quien quieres</em><br>ser.</h1>
+      <p class="hero-sub">Un día a la vez. Sin excusas.</p>
+    </div>
+    <div class="ticker-wrap">
+      <div class="ticker">
+        <span>Constancia&nbsp;&nbsp;·&nbsp;&nbsp;</span>
+        <span>Disciplina&nbsp;&nbsp;·&nbsp;&nbsp;</span>
+        <span>Progreso&nbsp;&nbsp;·&nbsp;&nbsp;</span>
+        <span>Foco&nbsp;&nbsp;·&nbsp;&nbsp;</span>
+        <span>Constancia&nbsp;&nbsp;·&nbsp;&nbsp;</span>
+        <span>Disciplina&nbsp;&nbsp;·&nbsp;&nbsp;</span>
+        <span>Progreso&nbsp;&nbsp;·&nbsp;&nbsp;</span>
+        <span>Foco&nbsp;&nbsp;·&nbsp;&nbsp;</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="auth-forms">
+    <div class="tabs" role="tablist">
+      <button class="tab active" role="tab" aria-selected="true" data-tab="login">Entrar</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="register">Crear cuenta</button>
+    </div>
+
+    <div class="form-panel" id="tab-login" role="tabpanel">
+      <label class="field">
+        <span>Email</span>
+        <input type="email" id="login-email" placeholder="tu@email.com" autocomplete="email">
+      </label>
+      <label class="field">
+        <span>Contraseña</span>
+        <input type="password" id="login-password" placeholder="••••••••" autocomplete="current-password">
+      </label>
+      <button class="btn-primary" id="btn-login">
+        <span>Acceder</span>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <p class="form-msg" id="login-msg" role="alert" aria-live="polite"></p>
+    </div>
+
+    <div class="form-panel hidden" id="tab-register" role="tabpanel">
+      <label class="field">
+        <span>Nombre</span>
+        <input type="text" id="register-name" placeholder="Tu nombre" autocomplete="name">
+      </label>
+      <label class="field">
+        <span>Email</span>
+        <input type="email" id="register-email" placeholder="tu@email.com" autocomplete="email">
+      </label>
+      <label class="field">
+        <span>Contraseña</span>
+        <input type="password" id="register-password" placeholder="••••••••" autocomplete="new-password">
+      </label>
+      <button class="btn-primary" id="btn-register">
+        <span>Crear cuenta</span>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <p class="form-msg" id="register-msg" role="alert" aria-live="polite"></p>
+    </div>
+  </div>
+</section>
+
+<!-- APP -->
+<section id="app-section" hidden>
+  <header class="app-header">
+    <div class="app-logo">Hábitos</div>
+    <div class="app-user">
+      <span id="user-name-display"></span>
+      <button class="theme-toggle" id="btn-theme" title="Cambiar tema" aria-label="Cambiar tema">
+        <span class="icon-moon" aria-hidden="true">🌙</span>
+        <span class="icon-sun"  aria-hidden="true">☀️</span>
+      </button>
+      <button class="btn-ghost" id="btn-logout">Salir</button>
+    </div>
+  </header>
+
+  <nav class="app-nav" aria-label="Navegación principal">
+    <button class="app-tab active" data-view="habitos" role="tab" aria-selected="true">Mis hábitos</button>
+    <button class="app-tab" data-view="crear" role="tab" aria-selected="false">Crear hábito</button>
+  </nav>
+
+  <main class="app-main">
+
+    <!-- Vista: Mis hábitos -->
+    <div id="view-habitos" role="tabpanel">
+
+      <div id="frase-banner" class="frase-banner" hidden>
+        <span class="frase-icon" aria-hidden="true">✦</span>
+        <p id="frase-texto" class="frase-texto"></p>
+      </div>
+
+      <div class="dashboard-row">
+        <div class="dash-card dash-card--accent">
+          <div class="dash-num" id="completados-hoy">0</div>
+          <div class="dash-label" id="label-completados">Completados hoy</div>
+        </div>
+        <div class="dash-card">
+          <div class="dash-num" id="total-habitos">0</div>
+          <div class="dash-label">Habilitados para hoy</div>
+        </div>
+        <div class="dash-card dash-card--wide">
+          <div class="dash-label">Progreso</div>
+          <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progress-track">
+            <div class="progress-fill" id="progress-bar"></div>
+          </div>
+          <div class="progress-pct" id="porcentaje-dia">0%</div>
+        </div>
+      </div>
+
+      <!-- Calendario mensual -->
+      <div class="calendar-card">
+        <div class="calendar-header">
+          <span class="calendar-month" id="cal-month-label"></span>
+          <span class="calendar-legend">
+            <span class="cal-legend-dot cal-legend-dot--done"></span> Hecho
+            <span class="cal-legend-dot cal-legend-dot--today"></span> Hoy
+          </span>
+        </div>
+        <div class="calendar-weekdays" aria-hidden="true">
+          <span>L</span><span>M</span><span>X</span><span>J</span><span>V</span><span>S</span><span>D</span>
+        </div>
+        <div class="calendar-grid" id="calendar-grid" role="grid"></div>
+      </div>
+
+      <p class="section-title" id="lista-titulo">Hábitos de hoy</p>
+      <div id="lista-habitos" class="habitos-grid" role="list"></div>
+      <div id="empty-state" class="empty-state" hidden>
+        <span class="empty-icon" aria-hidden="true">○</span>
+        <p>No hay hábitos para este día.</p>
+      </div>
+
+    </div>
+
+    <!-- Vista: Crear hábito -->
+    <div id="view-crear" hidden role="tabpanel">
+      <div class="crear-view">
+        <p class="section-title">Nuevo hábito</p>
+        <div class="crear-form">
+          <label class="field">
+            <span>¿Qué quieres lograr?</span>
+            <div class="input-with-action">
+              <input type="text" id="habito-titulo" placeholder="Ej: Meditar, Correr 5km, Leer..." maxlength="80">
+              <button id="btn-voice-habito" class="btn-voice" title="Dictar con voz" aria-label="Dictar con voz">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+              </button>
+            </div>
+          </label>
+          
+          <div class="crear-options">
+            <label class="field">
+              <span>Tipo de hábito</span>
+              <select id="habito-tipo">
+                <option value="recurrente">Recurrente (todos los días)</option>
+                <option value="puntual">Puntual (solo un día)</option>
+              </select>
+            </label>
+            
+            <label class="field" id="field-fecha-puntual">
+              <span>Fecha específica</span>
+              <input type="date" id="habito-fecha-puntual">
+            </label>
+          </div>
+
+          <button class="btn-primary" id="btn-add-habito" style="margin-top: 20px;">
+            <span>Crear hábito</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 3V13M3 8H13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</section>
+
+<!-- Modales -->
+<div id="modal-overlay" class="modal-overlay" hidden role="dialog" aria-modal="true">
+  <div class="modal">
+    <p class="modal-title" id="modal-title"></p>
+    <p class="modal-body"  id="modal-body"></p>
+    <div class="modal-actions">
+      <button class="btn-modal-cancel"  id="btn-modal-cancel">Cancelar</button>
+      <button class="btn-modal-confirm" id="btn-modal-confirm">Eliminar</button>
+    </div>
+  </div>
+</div>
+
+<div id="diario-overlay" class="modal-overlay" hidden role="dialog" aria-modal="true">
+  <div class="modal modal--diario">
+    <div class="diario-header">
+      <div>
+        <p class="modal-title" id="diario-title">Diario</p>
+        <p class="diario-fecha" id="diario-fecha"></p>
+      </div>
+      <button class="btn-diario-close" id="btn-diario-close">×</button>
+    </div>
+    <div class="diario-puntuacion-wrap">
+      <span class="diario-label">Estado de ánimo</span>
+      <div class="puntuacion-btns">
+        <button class="btn-punt" data-valor="1">1</button>
+        <button class="btn-punt" data-valor="2">2</button>
+        <button class="btn-punt" data-valor="3">3</button>
+        <button class="btn-punt" data-valor="4">4</button>
+        <button class="btn-punt" data-valor="5">5</button>
+      </div>
+      <span class="puntuacion-desc" id="puntuacion-desc"></span>
+    </div>
+    <div class="diario-campo">
+      <span class="diario-label">Reflexión</span>
+      <div class="input-with-action textarea-with-action">
+        <textarea id="diario-texto" class="diario-textarea" placeholder="¿Cómo te sientes hoy?" maxlength="2000"></textarea>
+        <button id="btn-voice-diario" class="btn-voice btn-voice-textarea" title="Dictar con voz" aria-label="Dictar con voz">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+        </button>
+      </div>
+      <span class="char-count" id="diario-char-count">0 / 2000</span>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-modal-cancel" id="btn-diario-cancel">Cancelar</button>
+      <button class="btn-primary" id="btn-diario-save">Guardar nota</button>
+    </div>
+    <p class="form-msg" id="diario-msg"></p>
+  </div>
+</div>
+
+<button id="btn-diario" class="btn-fab" hidden><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M4 3h14a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zM7 8h8M7 12h5" stroke="currentColor" stroke-width="1.6"/></svg><span class="fab-dot" id="fab-dot" hidden></span></button>
+<div id="toast" class="toast"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
